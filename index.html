@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Registration Form</title>
+<style>
+    body {
+        background-color: orange;
+    }
+
+    form {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        max-width: 800px;
+        margin: 0 auto;
+        background-color: white;
+        padding: 20px;
+        border-radius: 10px;
+    }
+
+    form div {
+        flex-basis: 48%;
+        margin-bottom: 10px;
+    }
+
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    table, th, td {
+        border: 1px solid black;
+        padding: 8px;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+</style>
+</head>
+<body>
+
+<h2>Registration Form</h2>
+
+<form id="registrationForm" onsubmit="submitForm(event)">
+    <div>
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+    </div>
+    <div>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+    </div>
+    <div>
+        <label for="phone">Phone:</label>
+        <input type="tel" id="phone" name="phone" required>
+    </div>
+    <div>
+        <label for="college">College:</label>
+        <input type="text" id="college" name="college" required>
+    </div>
+    <div>
+        <label for="degree">Degree:</label>
+        <input type="text" id="degree" name="degree" required>
+    </div>
+    <div>
+        <label for="stream">Stream:</label>
+        <input type="text" id="stream" name="stream" required>
+    </div>
+    <div>
+        <label for="year">Year of Passed Out:</label>
+        <input type="number" id="year" name="year" required>
+    </div>
+    <div>
+        <label for="cgpa">CGPA (0-10):</label>
+        <input type="number" step="0.01" id="cgpa" name="cgpa" min="0" max="10" required>
+    </div>
+    <div>
+        <label for="address">Address:</label>
+        <textarea id="address" name="address" required></textarea>
+    </div>
+    <div>
+        <label for="skills">Skills:</label>
+        <textarea id="skills" name="skills" required></textarea>
+    </div>
+    <button type="submit">Submit</button>
+</form>
+
+<table id="dataTable" style="display: none;">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>College</th>
+            <th>Degree</th>
+            <th>Stream</th>
+            <th>Year of Passed Out</th>
+            <th>CGPA</th>
+            <th>Address</th>
+            <th>Skills</th>
+        </tr>
+    </thead>
+    <tbody id="dataBody">
+    </tbody>
+</table>
+
+<script>
+    function submitForm(event) {
+        event.preventDefault();
+
+        var formData = new FormData(document.getElementById("registrationForm"));
+        var data = {};
+        formData.forEach(function(value, key){
+            data[key] = value;
+        });
+
+        var tableBody = document.getElementById("dataBody");
+        var newRow = tableBody.insertRow();
+        for (var key in data) {
+            var cell = newRow.insertCell();
+            cell.appendChild(document.createTextNode(data[key]));
+        }
+
+        document.getElementById("dataTable").style.display = "table";
+    }
+</script>
+
+</body>
+</html>
